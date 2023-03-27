@@ -11,17 +11,20 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Value("${app.mail.from}")
+    String fromEmail;
     @Value("${app.mail.to}")
     String toEmail;
     @Value("${app.mail.subject}")
     String subject;
+
     @Value("${app.mail.text}")
     String body;
 
     public void sendEmail()
     {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("@gmail.com");
+        message.setFrom(fromEmail);
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
